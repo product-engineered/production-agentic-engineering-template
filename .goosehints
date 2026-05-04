@@ -1,0 +1,40 @@
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+
+# Production Agentic Engineering Template
+
+## About
+
+This repository contains a starter template for new projects built with AI. It aims to implement best practices for context management, validation and testing when code is written by AI agents.
+
+## Editing AI agent context files
+
+All AI agent context files in this repo — `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `WARP.md`, `.goosehints`, `.cursor/rules/`, `.agent/rules/`, and the rest — are **generated** from `.rulesync/rules/`. DO NOT edit them directly; changes will be overwritten on the next regenerate.
+
+To update agent rules:
+
+1. Edit the relevant file under `.rulesync/rules/` (the source of truth).
+2. Run `pnpm rules:generate` to regenerate every target.
+3. Commit both the source and the generated files.
+
+## Commands
+
+| Command | Description |
+| ------- | ----------- |
+| `pnpm dev` | Start development server |
+| `pnpm build` | Production build |
+| `pnpm lint` / `pnpm lint:fix` | Run ESLint |
+| `pnpm format` / `pnpm format:check` | Run Prettier |
+| `pnpm type-check` | TypeScript validation |
+| `pnpm test` / `pnpm test:watch` | Run Vitest |
+| `pnpm test:coverage` | Run tests with coverage report |
+| `pnpm rules:generate` | Regenerate all agent context files from `.rulesync/` |
+| `pnpm docs:fetch` | Pull upstream documentation into `/docs` |
+
+## Git hooks
+
+Lefthook runs automatically on git events:
+
+- **pre-commit** — ESLint, Prettier, and TypeScript run in parallel. Fixes are auto-staged.
+- **pre-push** — Full test suite must pass.
